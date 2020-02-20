@@ -69,11 +69,12 @@ def score(input_, answer) -> int:
         if current_time >= world.days:
             break
         library = libraries[lib_id]
-        scan_time = min(world.days - current_time, math.ceil(len(ans_books) / library.daily))
+        # print(f"Lib #{lib_id} {library}  ans {ans_books}")
+        scan_time = min(world.days - current_time - 1, math.ceil(len(ans_books) / library.daily))
         scanned_books_len = min(library.daily * scan_time, len(ans_books))
         scanned_books = ans_books[:scanned_books_len]
         # print(f"scanning {scanned_books}, lib books {library.books}")
-        if not set(scanned_books) <= library.books:
+        if not set(scanned_books).issubset(library.books):
             logger.error(f"Scanned books that are not in library")
         for book in scanned_books:
             scanned.add(book)

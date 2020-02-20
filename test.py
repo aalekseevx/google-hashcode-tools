@@ -5,6 +5,7 @@ from utils import tasks, score, read_test, write_answer
 from glob import glob
 from importlib import import_module
 import os
+import copy
 import logging
 from logging import getLogger
 logger = getLogger("Task.test")
@@ -58,8 +59,8 @@ def check_solutions(solutions_: List[Solution], tasks: List[str]) -> List[List[i
     return results
 
 def test(task, solution, input_):
-    ans = solution(input_)
-    sc = score(input_, ans)
+    ans = solution(copy.deepcopy(input_))
+    sc = score(copy.deepcopy(input_), ans)
     update_best(task, sc, ans)
     return sc
 

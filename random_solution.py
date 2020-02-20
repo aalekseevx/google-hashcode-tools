@@ -13,7 +13,7 @@ def sample_ans(input_):
         lib_books = list(lib.books)
         shuffle(lib_books)
         ans.append( (lib.id, lib_books) )
-    print(f"Got ans {ans}")
+    # print(f"Got ans {ans}")
     return ans
 
 
