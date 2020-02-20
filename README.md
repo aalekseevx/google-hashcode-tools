@@ -1,0 +1,1 @@
+# HashCodeQualifier2020
