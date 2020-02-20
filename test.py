@@ -43,6 +43,7 @@ def check_solutions(solutions_: List[Solution], tasks: List[str]) -> List[List[i
         max_score = 0
         for _ in range(iterations):
             max_score = max(max_score, test(task, func, input_))
+        print(f"Finished {task}")
         return max_score
 
     results = []

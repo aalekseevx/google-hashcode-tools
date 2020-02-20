@@ -17,6 +17,6 @@ def sample_ans(input_):
     return ans
 
 
-solution = Solution(sample_ans, 20, "random_solution")
+solution = Solution(sample_ans, 1, "random_solution")
 if __name__ == "__main__":
     print_solutions([solution])
