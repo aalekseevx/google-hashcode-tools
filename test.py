@@ -64,10 +64,8 @@ def test(task, solution, input_):
 
 
 def load_solutions():
-    import random_solution
-    register_solution(random_solution.solution)
-    import better_solution
-    register_solution(better_solution.solution)
+    import sample_solution
+    register_solution(sample_solution.solution)
 
 def print_solutions(solutions_):
     prepare_logger()
