@@ -3,6 +3,7 @@ from tabulate import tabulate
 from typing import List, Tuple
 from utils import tasks, score, read_test, write_answer
 from glob import glob
+from importlib import import_module
 import os
 import logging
 from logging import getLogger
@@ -14,7 +15,7 @@ solutions: List[Solution] = []
 def register_solution(solution):
     global solutions
     if not solution: return
-    logger.info(f"Register {solution}")
+    print(f"Register {solution}")
     solutions.append(solution)
 
 def update_best(task, score, ans):
@@ -64,10 +65,9 @@ def test(task, solution, input_):
 
 
 def load_solutions():
-    import random_solution
-    register_solution(random_solution.solution)
-    import better_solution
-    register_solution(better_solution.solution)
+    files = glob("*_solution.py")
+    for file in files:
+        register_solution(import_module(file[:-3]).solution)
 
 def print_solutions(solutions_):
     prepare_logger()
