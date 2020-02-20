@@ -50,8 +50,14 @@ def read_test(testfile: str):
 
 
 def write_answer(ans, answerfile: str):
+    new_ans = []
+    for lib_id, books in ans:
+        if len(books) > 0:
+            new_ans.append((lib_id, books))
+    ans = new_ans
     with open(answerfile, 'w') as f:
         f.write(f"{len(ans)}\n")
+        
         for lib_id, books in ans:
             f.write(f"{str(lib_id)} {len(books)}\n{' '.join(map(str,books))}\n")
 
