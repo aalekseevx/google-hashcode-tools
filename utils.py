@@ -38,6 +38,8 @@ def read_test(testfile: str):
         i = 0
         while line1 := f.readline():
             line2 = f.readline()
+            if not line1 or not line2:
+                break
             lib_info = list(map(int, line1.split()))
             book_set = set(list(map(int, line2.split())))
             new_library = Library._make( [ i, lib_info[1], lib_info[2], book_set ] )
