@@ -5,8 +5,8 @@ from logging import getLogger
 logger = getLogger("Task.utils")
 
 tasks = {
-    'a': "a_example.txt",
-    'b': "b_read_on.txt",
+    # 'a': "a_example.txt",
+    # 'b': "b_read_on.txt",
     'c': "c_incunabula.txt",
     'd': "d_tough_choices.txt",
     'e': "e_so_many_books.txt",

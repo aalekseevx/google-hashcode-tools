@@ -8,8 +8,8 @@ logger = getLogger("Task.third_solution")
 
 def sample_ans(input_):
     world, books, libraries = input_
-    about = 10000
-    shift = 1500
+    about = 15000   # e - 15000
+    shift = 1000
     const = random.randint(about - shift, about + shift)
     best_libs = s.SortedSet(key=lambda x: x[0])
     answer = []
@@ -69,6 +69,6 @@ def sample_ans(input_):
         best_libs.pop(-1)
     return answer
 
-solution = Solution(sample_ans, 10, "third_solution")
+solution = Solution(sample_ans, 20, "third_solution")
 if __name__ == "__main__":
     print_solutions([solution])
