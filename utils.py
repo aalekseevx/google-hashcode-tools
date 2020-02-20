@@ -16,11 +16,6 @@ tasks = {
 def read_test(testfile: str):
     pass
 
-
-def read_answer(answerfile: str, cars: int):
-   pass
-
-
 def write_answer(ans, answerfile: str):
     pass
 
