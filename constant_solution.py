@@ -4,13 +4,13 @@ import random
 from logging import getLogger
 import sortedcontainers as s
 from copy import deepcopy
-logger = getLogger("Task.third_solution")
+logger = getLogger("Task.constant_solution")
+
+disable_after = 5
+magic = 80000
 
 def sample_ans(input_):
     world, books, libraries = input_
-    about = 10000
-    shift = 1500
-    const = random.randint(about - shift, about + shift)
     best_libs = s.SortedSet(key=lambda x: x[0])
     answer = []
     books_to_libs = [[] for _ in range(world.books)]
@@ -21,11 +21,15 @@ def sample_ans(input_):
             to_scan[lib.id].add((books[book], book))
             sm += books[book]
             books_to_libs[book].append(lib.id)
+        about = 10000
+        shift = 500
+        a = random.randint(about - shift, about + shift)
         # [10000 - 500, 10000 + 500]
-        best_libs.add((sm - const * lib.signup, lib.id))
+        best_libs.add((sm - magic * lib.signup, lib.id))
 
     day = 0
     # print(best_libs)
+    iter = 0
     while len(best_libs) > 0 and day < world.days:
         def update_lib():
             lib_id = best_libs[-1][1]
@@ -67,8 +71,16 @@ def sample_ans(input_):
         lib = libraries[win_id]
         day += lib.signup
         best_libs.pop(-1)
+
+        iter += 1
+        if iter == disable_after:
+            for score, id in best_libs:
+                best_libs.remove((score, id))
+                new_score = score + magic * libraries[id].signup
+                best_libs.add((new_score, id))
+    print(f"iteration: {iter}")
     return answer
 
-solution = Solution(sample_ans, 10, "third_solution")
+solution = Solution(sample_ans, 1, "constant_solution")
 if __name__ == "__main__":
     print_solutions([solution])
