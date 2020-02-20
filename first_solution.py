@@ -3,6 +3,7 @@ from test import Solution, print_solutions
 import random
 from logging import getLogger
 import sortedcontainers as s
+from copy import deepcopy
 logger = getLogger("Task.first_solution")
 
 def sample_ans(input_):
@@ -43,22 +44,25 @@ def sample_ans(input_):
         while update_lib():
             pass
 
+        def use_lib(my_id):
+            lib = libraries[my_id]
+            # print (f"take library {win_id}")
+            to_append = deepcopy((my_id, [i[1] for i in to_scan[my_id]]))
+            # print(to_append)
+            if len(to_append) > 0:
+                answer.append(to_append)
+            for del_book in to_scan[my_id]:
+                for where_lib in books_to_libs[del_book[1]]:
+                    try: 
+                        to_scan[where_lib].remove((books[del_book[1]], del_book[1]))
+                    except KeyError:
+                        pass
 
-        
         win_id = best_libs[-1][1]
-        # print (f"take library {win_id}")
-        to_append = (win_id, [i[1] for i in to_scan[win_id]])
-        # print(to_append)
-        answer.append(to_append)
-        for del_book in to_scan[win_id]:
-            for where_lib in books_to_libs[del_book[1]]:
-                try: 
-                    to_scan[where_lib].remove((books[del_book[1]], del_book[1]))
-                except KeyError:
-                    pass
-
-        best_libs.pop(-1)
+        use_lib(win_id)
+        lib = libraries[win_id]
         day += lib.signup
+        best_libs.pop(-1)
     return answer
 
 solution = Solution(sample_ans, 1, "first_solution")
